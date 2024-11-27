@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration</title>
+</head>
+<style>
+    div{
+        padding:5px;
+        width:100%;
+    }
+</style>
+<body>
+    <h2 style="text-align:center;">Register Account</h2>
+    <form id="registrationForm">
+        <div><span>Full Name : </span><input type="text" required pattern="[A-Za-z]{4,}" title="Username must be atleast 4 characters" id="fn"></div>
+        <div><span>Password : </span><input type="password" required title="atleast 4 characters"id="password"></div>
+        <div><span>Confirm Password : </span><input type="password" required id="confirmPassword"></div>
+        <div><span>Email : </span><input type="email" required pattern="[a-zA-Z0-90-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="john12@gmail.com"></div>
+        <div><span>Phone number : </span><input type="tel" required pattern="\d{3}-\d{3}-\d{4}"><p style="text-align:center;">Format 0XXX-XXX-XXX</p></div>
+        <div><span>Zip Code : </span><input type="number" required pattern="\d{5}"></div>
+        <div><span>Card type : </span><select>
+            <option value="visa">Visa</option>
+            <option value="credit">Credit Card</option>
+            <option value="debit">Debit Card</option>
+        </select></div>
+        <div>
+            <span>Card Number : </span><input type="number" required pattern="\d{4}-\d{4}-\d{4}-\d{4}"><p style="text-align:center;" required>Format 1111-2222-3333-4444</p>
+        </div>
+        <div><span>Expiry Date : </span><input type="date"><p style="text-align:center;" required >
+            Format YYYY-MM-DD
+        </p></div>
+        <div style="text-align:center;"><span><button type="submit">Register</button></span> <span></span><button onclick="clear()" id="clearButton">Clear form</button></div>
+    </form>
+    <script>
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            const message = document.getElementById('message');
+
+            if (confirmPassword !== password) {
+                message.textContent = "Passwords do not match.";
+            } else {
+                message.textContent = "";
+            }
+        });
+
+        // Prevent form submission       document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (confirmPassword !== password) {
+                event.preventDefault();
+                alert("Passwords do not match. Please try again.");
+            }
+        });
+        document.getElementById('clearButton').addEventListener('click', function() {
+            document.getElementById('registrationForm').reset(); // Reset the form
+            document.getElementById('message').textContent = ""; // Clear the message
+        });
+    </script>
+</body>
+</html>
